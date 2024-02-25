@@ -31,5 +31,27 @@ def get_frame(drone: Tello):
             break
 
 
-get_telemetry(tello)
-get_frame(tello)
+def run_bottom_video(drone: Tello):
+    drone.set_video_direction(drone.CAMERA_DOWNWARD)
+    drone.streamon()
+    frame_read = drone.get_frame_read()
+
+    drone.takeoff()
+    while True:
+        frame = frame_read.frame
+        crop_img = frame[0:240, 0:320]
+        cv2.imshow('drone', crop_img)
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
+    drone.streamoff()
+    cv2.destroyAllWindows()
+    drone.end()
+
+
+def main(drone: Tello):
+    get_telemetry(drone)
+    run_bottom_video(drone)
+
+
+if __name__ == "__main__":
+    main(tello)
