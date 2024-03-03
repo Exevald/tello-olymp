@@ -102,8 +102,8 @@ def detect_markers_in_image(image, draw_reference_corner=True, draw_center=True,
     :rtype: image, list
     """
     corners, ids, ordered_corners, center_pts = get_aruco_markers(image, target_id)
-    if len(ids) > 0:
-        print(ids)
+    #if len(ids) > 0:
+        #print(ids)
     if len(ordered_corners) > 0:
         # ids = ids.flatten()
         for i, id in enumerate(ids):
