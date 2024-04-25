@@ -1,8 +1,7 @@
 import time
-
 from djitellopy import Tello
+from zxc_tello import aruco_utils
 import cv2
-import aruco_utils
 
 tello = Tello()
 tello.connect()
@@ -53,10 +52,8 @@ def fly_to_aruco_center(drone: Tello, aruco_id: int):
                 if abs(distance) <= MIN_DISTANCE:
                     tello.send_rc_control(0, 0, 0, 0)
                     stop_tello_motion = True
-
                 else:
                     tello.send_rc_control(l_r_speed, f_b_speed, 0, 0)
-
             except Exception as exc:
                 print("send_rc_control exception: ", exc)
 
@@ -103,7 +100,6 @@ def main(drone: Tello) -> int:
     # Взлёт
     drone.move_up(30)
     time.sleep(0.5)
-
 
     # Полёт к 8 маркеру
     drone.go_xyz_speed(100, 100, 0, MAX_DIAGONAL_SPEED)

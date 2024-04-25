@@ -1,5 +1,5 @@
 from djitellopy import Tello
-import zxc_tello.main as zxc
+import zxc_tello as zxc
 
 tello = Tello()
 tello.connect()
@@ -10,6 +10,7 @@ MIN_DISTANCE = 25
 
 def main(drone: Tello) -> int:
     zxc.get_telemetry(drone)
+    zxc.check_motors(drone)
 
     return 0
 
